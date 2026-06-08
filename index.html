@@ -1,0 +1,156 @@
+<!DOCTYPE html>
+<html>
+<head>
+  <meta charset="utf-8">
+  <meta name="description" content="Learning Humanoid Perceptive Ladder Climbing">
+  <meta name="viewport" content="width=device-width, initial-scale=1">
+  <title>LadderMan</title>
+
+  <link rel="icon" href="./static/images/icon.png" type="image/png">
+
+  <link rel="stylesheet" href="./static/css/bulma.min.css">
+  <link rel="stylesheet" href="./static/css/bulma-carousel.min.css">
+  <link rel="stylesheet" href="./static/css/bulma-slider.min.css">
+  <link rel="stylesheet" href="./static/css/fontawesome.all.min.css">
+  <link rel="stylesheet"
+        href="https://cdn.jsdelivr.net/gh/jpswalsh/academicons@1/css/academicons.min.css">
+  <link rel="stylesheet" href="./static/css/index.css?v=20260608">
+  <link rel="preconnect" href="https://fonts.googleapis.com">
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+  <link href="https://fonts.googleapis.com/css2?family=IBM+Plex+Mono:wght@400;700&display=swap" rel="stylesheet">
+  <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.5.1/jquery.min.js"></script>
+  <script defer src="./static/js/fontawesome.all.min.js"></script>
+  <script src="./static/js/bulma-carousel.min.js"></script>
+  <script src="./static/js/bulma-slider.min.js"></script>
+  <script src="https://cdn.plot.ly/plotly-2.27.0.min.js"></script>
+  <script src="./static/js/heatmap.js?v=20260608b"></script>
+  <script src="./static/js/index.js?v=20260608"></script>
+  <script>
+    (function () {
+      const isMobile = window.matchMedia("(pointer: coarse)").matches || window.innerWidth <= 900;
+      if (isMobile && !/index-mobile\.html/i.test(window.location.pathname)) {
+        window.location.replace("./index-mobile.html");
+      }
+    })();
+  </script>
+</head>
+
+<body>
+  <section class="hero is-link is-fullheight video" style="overflow: hidden; position:relative;">
+    <div class="hero-video" style="position: absolute; top: 50%; left: 50%; transform: translate(-50%, -50%); width: 101%; height: 101%;">
+      <video playsinline autoplay muted loop style="width: 100%; height: 100%; object-fit: cover;">
+        <source src="./static/videos/teaser.mp4" type="video/mp4">
+      </video>
+    </div>
+    
+    <div style="position: absolute; bottom: 20px; left: 20px; color: white; padding: 10px 15px; border-radius: 8px; font-size: 1.2rem; z-index: 10; text-shadow: 2px 2px 4px rgba(0, 0, 0, 0.8);">
+      <div style="margin-bottom: 5px;">Random initial poses.</div>
+      <div>Onboard <u>depth</u> sensing. Real-time adaptation.</div>
+    </div>
+  
+  <div class="hero-body">
+    <div class="container has-text-centered">
+      <h1 class="title is-1 publication-title is-size-1-mobile" style="font-size: 5rem; text-shadow: 2px 2px 4px rgba(0, 0, 0, 0.8);">
+        LadderMan
+      </h1>
+      <h1 class="subtitle is-1 publication-title is-size-4-mobile" style="font-size: 3.5rem; text-shadow: 2px 2px 4px rgba(0, 0, 0, 0.8);">
+        Learning Humanoid Perceptive Ladder Climbing
+      </h1>
+    </div>
+  </div>
+</section>
+
+  <section class="section">
+    <div class="container">
+          <h2 class="title is-2" style="text-align: center;">Abstract</h2>
+          <div class="content has-text-justified" style="width: 75%; margin: 0 auto;">
+            <p class="abstract-text" style="font-size: 0.95rem; line-height: 1.5;">
+              Humanoid robots hold great promise for operating in human-centered environments, yet ladder climbing remains one of the most challenging tasks due to sparse footholds and handholds, complex whole-body coordination, and sensitivity to perception and control errors. We present <strong>LadderMan</strong>, a unified system that enables humanoid robots to robustly climb diverse ladders and perform manipulation under such constrained conditions. Our climbing policy is built on a scalable two-stage learning pipeline, where we use hybrid motion tracking to learn multiple climbing experts from a single reference motion, and distill these experts into a unified depth-based visuomotor climbing policy via hybrid imitation and reinforcement learning. To enable real-world deployment, we leverage vision foundation models to bridge the sim-to-real gap in depth perception. 
+              Building on the learned climbing policy, we further train a separate manipulation policy using a dual-agent formulation, allowing stable on-ladder manipulation via teleoperation.
+              Experiments demonstrate that LadderMan achieves robust ladder climbing across a wide range of geometries, successfully transfers to real-world hardware in a zero-shot manner, and supports various manipulation tasks under challenging ladder constraints.
+             
+            </p>
+          </div>
+          <br>
+          <div style="text-align: center;">
+            <img src="./static/images/method.png" class="interpolation-image" style="width: 75%; height: auto;"/>
+          </div>
+    </div>
+  </section>
+
+<section class="section">
+  <div class="container">
+    <h3 class="title is-3" style="text-align: center;">LadderMan enables ladder climbing and on-ladder manipulation</h3>
+    <!-- Desktop Grid Layout -->
+    <div class="simulation-grid desktop-grid">
+      <div class="simulation-item">
+        <video controls loop muted playsinline autoplay preload="metadata" src="./static/videos/painting.mp4"></video>
+        <p class="simulation-label">Adjust a Wall Painting</p>
+      </div>
+      <div class="simulation-item">
+        <video controls loop muted playsinline autoplay preload="metadata" loading="lazy" src="./static/videos/box.mp4"></video>
+        <p class="simulation-label">Hand Off a Box from a High Shelf</p>
+      </div>
+      <div class="simulation-item">
+        <video controls loop muted playsinline autoplay preload="metadata" loading="lazy" src="./static/videos/lightbulb.mp4"></video>
+        <p class="simulation-label">Tighten a Light Bulb</p>
+      </div>
+    </div>
+  </div>
+</section>
+
+<section class="section">
+  <div class="container">
+    <h3 class="title is-3" style="text-align: center;">LadderMan supports keyboard-based climbing direction control</h3>
+    <div class="simulation-grid single-column">
+      <div class="simulation-item">
+        <video controls loop muted playsinline autoplay preload="metadata" src="./static/videos/keyboard.mp4"></video>
+        <p class="simulation-label">Consecutive Bidirectional Climbing</p>
+      </div>
+    </div>
+  </div>
+</section>
+
+
+<section class="section">
+  <div class="container">
+    <h3 class="title is-3" style="text-align: center;">LadderMan enables zero-shot sim-to-real transfer</h3>
+    <div class="content has-text-justified" style="width: 75%; margin: 0 auto;">
+      <p class="abstract-text" style="font-size: 0.95rem; line-height: 1.5;">
+        A major challenge in deploying perceptive humanoid policies is the sim-to-real gap in depth observations.
+        LadderMan bridges the visual gap between simulation and real world by applying rung-focused
+        masking, vision foundation model, and minimalist noise augmentation.
+      </p>
+    </div>
+    <br>
+    <div style="text-align: center;">
+      <img src="./static/images/depth_vis.png" class="interpolation-image" style="width: 75%; height: auto;"/>
+    </div>
+    <div class="simulation-grid two-column">
+      <div class="simulation-item">
+        <video controls loop muted playsinline autoplay preload="metadata" src="./static/videos/depth_raw.mp4"></video>
+        <p class="simulation-label">Raw Depth</p>
+      </div>
+      <div class="simulation-item">
+        <video controls loop muted playsinline autoplay preload="metadata" loading="lazy" src="./static/videos/depth_vfm.mp4"></video>
+        <p class="simulation-label">VFM Depth</p>
+      </div>
+    </div>
+  </div>
+</section>
+
+<section class="section">
+  <div class="container">
+    <h3 class="title is-3" style="text-align: center;">Robust ladder climbing across geometries</h3>
+    <div class="content has-text-justified" style="width: 75%; margin: 0 auto;">
+      <p class="abstract-text" style="font-size: 0.95rem; line-height: 1.5;">
+        We evaluate the learned climbing policy across ladders with varying rung spacing <i>z</i> and inclination angle φ in simulation.
+        We compare LadderMan against a blind motion tracking baseline trained without perception.
+      </p>
+    </div>
+    <div id="success-rate-heatmap" class="success-rate-heatmap"></div>
+  </div>
+</section>
+
+</body>
+</html>
